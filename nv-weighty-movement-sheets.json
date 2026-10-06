@@ -1,0 +1,33 @@
+{
+  "_readme": "Source of truth for the build. Change a sheet before the code. null = unfilled cell; verified=false = not yet checked against the running game. Preflight lists every null and every unresolved reference before each build.",
+  "project": {
+    "host_game": "fallout-new-vegas",
+    "loader": "nvse (xNVSE, installed by Melty)",
+    "players": "solo",
+    "required_games": ["Fallout: New Vegas"],
+    "inspiration_only": ["Grand Theft Auto IV: The Complete Edition"],
+    "version_target": "1.0"
+  },
+  "movement": [
+    {"id": "accel_walk", "what": "speed ramp-up when walking", "value": null, "unit": "ratio of base speed per second", "option_id": "opt_weight", "hook": "hook_player_speed", "verified": false},
+    {"id": "accel_sprint", "what": "speed ramp-up when sprinting", "value": null, "unit": "ratio of base speed per second", "option_id": "opt_weight", "hook": "hook_player_speed", "verified": false},
+    {"id": "turn_inertia", "what": "how much heading change lags input at speed", "value": null, "unit": "0-1", "option_id": "opt_weight", "hook": "hook_player_turn", "verified": false}
+  ],
+  "slides": [
+    {"id": "sprint_slide", "trigger": "release sprint/forward while sprinting", "duration_s": null, "friction_curve": null, "min_entry_speed": null, "option_id": "opt_slide", "hook": "hook_player_speed", "verified": false}
+  ],
+  "stumbles": [
+    {"id": "stumble_rough_ground", "trigger": "sprinting over rough or sloped ground", "chance": null, "recovery_s": null, "min_speed": null, "anim": null, "option_id": "opt_stumble", "hook": "hook_player_anim", "verified": false}
+  ],
+  "options": [
+    {"id": "opt_weight", "label": "Movement weight", "type": "slider", "min": 0, "max": 1, "default": null, "storage": "config ini in FalloutNV config folder"},
+    {"id": "opt_slide", "label": "Sprint slide", "type": "toggle+slider", "default": null, "storage": "config ini in FalloutNV config folder"},
+    {"id": "opt_stumble", "label": "Stumble frequency", "type": "slider", "min": 0, "max": 1, "default": null, "storage": "config ini in FalloutNV config folder"}
+  ],
+  "hooks": [
+    {"id": "hook_player_speed", "target": "player movement speed each frame", "route": "xNVSE plugin", "address_or_api": null, "verified": false},
+    {"id": "hook_player_turn", "target": "player heading/turn handling", "route": "xNVSE plugin", "address_or_api": null, "verified": false},
+    {"id": "hook_player_anim", "target": "play stumble/slide animation on player", "route": "xNVSE plugin", "address_or_api": null, "verified": false},
+    {"id": "hook_options_ui", "target": "in-game options menu entry", "route": "xNVSE plugin / existing menu approach", "address_or_api": null, "verified": false}
+  ]
+}
